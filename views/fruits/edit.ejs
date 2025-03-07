@@ -2,21 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit a Fruit</title>
+    <!-- Include the head partial with a dynamic title -->
+    <%- include("../partials/head", { title: `Edit: ${fruit.name}` }) %>
   </head>
   <body>
-    <h1>Edit <%= fruit.name %></h1>
+    <!-- Include the navigation bar partial -->
+    <%- include("../partials/navbar") %>
 
-    <!-- Navigation: Links back to Fruits list -->
-    <nav>
-        <ul>
-            <li>
-                <a href="/fruits">Back to Fruits</a>
-            </li>
-        </ul>
-    </nav>
+    <h1>Edit <%= fruit.name %></h1>
 
     <!-- Edit Form: Sends updated data to PUT /fruits/:id -->
     <form action="/fruits/<%= fruit._id %>?_method=PUT" method="POST">
@@ -37,5 +30,7 @@
     <!-- Back to Fruits List -->
     <a href="/fruits">Back to Fruits</a>
 
+    <!-- Include the footer partial -->
+    <%- include("../partials/footer") %>
   </body>
 </html>
