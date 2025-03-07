@@ -14,7 +14,7 @@ body {
 h1 {
     color: #E84855;
     /* Warm fruit red */
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
@@ -53,6 +53,63 @@ nav a {
 nav a:hover {
     background-color: #E84855;
     /* Fruit Red */
+}
+
+/* 🍍 Landing Page Styling */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #FF9B71, #FFFD82);
+    text-align: center;
+    padding: 50px;
+}
+
+.landing-container h1 {
+    font-size: 4rem;
+    color: #2D3047;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.landing-container p {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 20px auto;
+    color: #2D3047;
+}
+
+.landing-container .cta-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.landing-container .cta-buttons a {
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.landing-container .cta-buttons .explore {
+    background-color: #1B998B;
+}
+
+.landing-container .cta-buttons .explore:hover {
+    background-color: #2D3047;
+}
+
+.landing-container .cta-buttons .add-fruit {
+    background-color: #E84855;
+}
+
+.landing-container .cta-buttons .add-fruit:hover {
+    background-color: #FF9B71;
 }
 
 /* 🍓 Buttons (for Edit and Delete) */
