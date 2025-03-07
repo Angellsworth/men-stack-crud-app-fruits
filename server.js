@@ -1,3 +1,4 @@
+//// ********** Server.Js **********
 // ********** IMPORT DEPENDENCIES **********
 const express = require("express"); // Import Express framework
 const dotenv = require("dotenv"); // Import dotenv for environment variables
@@ -87,6 +88,38 @@ app.delete('/fruits/:fruitId', async (req, res) => {
         console.error(`Error deleting fruit: ${error.message}`);
         res.status(500).send("Internal Server Error: Could not delete fruit");
     }
+});
+  //*********** EDIT ROUTE (GET) *********/
+app.get("/fruits/:fruitId/edit", async (req, res) => {
+    try {
+        const foundFruit = await Fruit.findById(req.params.fruitId);
+        if (!foundFruit) {
+            return res.status(404).send("Fruit not found");
+        }
+        res.render("fruits/edit.ejs", { fruit: foundFruit });
+    } catch (error) {
+        console.error("Error finding fruit:", error);
+        res.status(500).send("Error retrieving fruit for editing.");
+    }
+});
+// *********** EDIT ROUTE (PUT) *********
+// Captures edit form submission from client and sends updates to MongoDB
+app.put('/fruits/:fruitId', async (req, res) => {
+    
+    // Convert checkbox value into a boolean
+    // If the checkbox is checked, its value will be 'on' (true)
+    // If not checked, we manually set it to false
+    if (req.body.isReadyToEat === 'on') { 
+        req.body.isReadyToEat = true;
+    } else {
+        req.body.isReadyToEat = false;
+    }
+
+    // Find the fruit by its ID and update its properties with the submitted form data
+    await Fruit.findByIdAndUpdate(req.params.fruitId, req.body);
+
+    // Redirect user to the updated fruit's show page
+    res.redirect(`/fruits/${req.params.fruitId}`);
 });
 // ********** START SERVER **********
 app.listen(3000, () => {
