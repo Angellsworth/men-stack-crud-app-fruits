@@ -2,26 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Sets the character encoding for the document -->
-    <meta charset="UTF-8" />
-    
-    <!-- Makes the page responsive on all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Sets the page title -->
-    <title>Create a Fruit</title>
+    <!-- Include the head partial with a dynamic title -->
+    <%- include("../partials/head", { title: "Create a Fruit" }) %>
   </head>
   <body>
-    <h1>Create a New Fruit!</h1>
+    <!-- Include the navigation bar partial -->
+    <%- include("../partials/navbar") %>
 
-    <!-- Navigation: Link back to the Fruits list -->
-    <nav>
-        <ul>
-            <li>
-                <a href="/fruits">Back to Fruits</a>
-            </li>
-        </ul>
-    </nav>
+    <h1>Create a New Fruit!</h1>
 
     <!-- Form to add a new fruit -->
     <!-- Sends a POST request to /fruits when submitted -->
@@ -38,5 +26,8 @@
         <!-- Submit Button -->
         <button type="submit">Add Fruit</button>
     </form>
+
+    <!-- Include the footer partial -->
+    <%- include("../partials/footer") %>
   </body>
 </html>
