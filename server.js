@@ -1,69 +1,76 @@
-// Import dependencies - required modules
-const express = require("express");
-const dotenv = require("dotenv");// put above mongoose
-const mongoose = require("mongoose");
-const Fruit = require("./models/fruit.js");// Import the Fruit model from fruit.js
+// ********** IMPORT DEPENDENCIES **********
+const express = require("express"); // Import Express framework
+const dotenv = require("dotenv"); // Import dotenv for environment variables
+const mongoose = require("mongoose"); // Import Mongoose to interact with MongoDB
+const Fruit = require("./models/fruit.js"); // Import the Fruit model from fruit.js
 
-// Initialize Express
-const app = express();
+// ********** INITIALIZE EXPRESS **********
+const app = express(); // Create an instance of Express
 
-// Load environment variables
-dotenv.config(); // Loads evironment variables from .env file
+// ********** LOAD ENVIRONMENT VARIABLES **********
+dotenv.config(); // Loads environment variables from .env file
 
-// Connect to MongoDB using the connection string from .env - (can do an eventListener)
-mongoose.connect(process.env.MONGODB_URI);//needs to be below dot.env
+// ********** CONNECT TO MONGODB **********
+mongoose.connect(process.env.MONGODB_URI); // Connects to MongoDB
 
-// Log connection status to the terminal on start 
+// Event listeners for database connection status
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-mongoose.connection.on('error', (error) => {
-    console.log(`An error connecting to MongoDb has occurred: ${error}`)
-})
-//try/catch best practice for errors
+mongoose.connection.on("error", (error) => {
+  console.log(`An error connecting to MongoDB has occurred: ${error}`);
+});
+// Using try/catch for best error handling practice
 
-//middleware
+// ********** MIDDLEWARE **********
+// Body parser middleware: Reads form data and makes it accessible in req.body
+app.use(express.urlencoded({ extended: false }));
 
-//body parser middleware: this function reads the request body
-//and decodes it into req.body so we can access form data
-app.use(express.urlencoded({ extended: false }))
+// ********** ROUTES **********
 
-
-
-// *** ROUTES ***
-
-// Landing Page GET -  (index.ejs)
+// 🏠 LANDING PAGE ROUTE (GET) - Renders the homepage
 app.get("/", async (req, res) => {
-  res.render("index.ejs"); // Renders the landing page
+  res.render("index.ejs"); // Loads index.ejs file as the homepage
 });
 
-// Form page GET - form for adding a new fruit/new.ejs
-app.get('/fruits/new', (req, res) => {
-    //never add a trailing slash with render (the / before fruits folder)
-  res.render('fruits/new.ejs');
+// ➕ NEW FRUIT FORM ROUTE (GET) - Displays a form to add a new fruit
+app.get("/fruits/new", (req, res) => {
+  res.render("fruits/new.ejs"); // Loads the form page for adding a fruit
 });
 
-// POST /fruits - recieve form submissions
+// ✅ CREATE FRUIT ROUTE (POST) - Processes form submission & adds fruit to the database
 app.post("/fruits", async (req, res) => {
-    // if (req.body.isReadyToEat === "on") {//this is a string
-    //   req.body.isReadyToEat = true;//we need to change it to a boolean
-    // } else {
-    //   req.body.isReadyToEat = false;
-    // }
-    req.body.isReadyToEat = !!req.body.isReadyToEat//(double exclamation marks (!!) are a shortcut to convert any value into a strict true or false. )
-    //create the data in our database
-    await Fruit.create(req.body);
-    res.redirect("/fruits");
-  });
+  // Convert form checkbox value into a boolean (true/false)
+  req.body.isReadyToEat = !!req.body.isReadyToEat;
+  
+  // Create new fruit entry in the database
+  await Fruit.create(req.body);
+  
+  // Redirect to the index page to display all fruits
+  res.redirect("/fruits");
+});
 
-//index of fruits route for fruits
-app.get('/fruits', async(req, res) => {
-    const allFruits = await Fruit.find({})
-    res.render('fruits/index.ejs', {fruits: allFruits})
-})
-//UPDATE*add new fruit
+// 📜 INDEX OF FRUITS ROUTE (GET) - Displays a list of all fruits
+app.get("/fruits", async (req, res) => {
+  const allFruits = await Fruit.find({}); // Fetches all fruits from the database
+  res.render("fruits/index.ejs", { fruits: allFruits }); // Renders the index page
+});
 
-// Start the server and listen on port 3000
+// 🔍 SHOW FRUIT ROUTE (GET) - Displays details of a single fruit
+app.get("/fruits/:fruitId", async (req, res) => {
+    try {
+        const foundFruit = await Fruit.findById(req.params.fruitId);
+        if (!foundFruit) {
+            return res.status(404).send("Fruit not found");
+        }
+        res.render("fruits/show.ejs", { fruit: foundFruit });
+    } catch (error) {
+        console.error(error);
+        res.status(400).send("Invalid Fruit ID");
+    }
+});
+
+// ********** START SERVER **********
 app.listen(3000, () => {
-  console.log("Making a CRUD-y Salad on Port 3000");
+  console.log("Making a CRUD-y Salad on Port 3000"); // Server is running
 });
