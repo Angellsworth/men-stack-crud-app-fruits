@@ -1,0 +1,139 @@
+/* 🍋 General Page Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFFD82;
+    /* Light yellow */
+    color: #2D3047;
+    /* Dark blue-gray */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* 🍊 Header Styling */
+h1 {
+    color: #E84855;
+    /* Warm fruit red */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* 🍇 Navigation Bar */
+nav {
+    background-color: #1B998B;
+    /* Vibrant green */
+    padding: 15px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #FF9B71;
+    /* Peach */
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #E84855;
+    /* Fruit Red */
+}
+
+/* 🍓 Buttons (for Edit and Delete) */
+button,
+.button {
+    background-color: #FF9B71;
+    /* Warm peach */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 20px;
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Ensure text inside links stays centered */
+.button {
+    text-align: center;
+    padding: 12px 24px;
+}
+
+/* 🥝 Delete Button */
+button[type="submit"] {
+    background-color: #E84855;
+    /* Bright fruit red */
+}
+
+button:hover,
+.button:hover {
+    background-color: #2D3047;
+    /* Dark contrast */
+}
+
+/* 🍍 Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #2D3047;
+    border-radius: 5px;
+    width: 250px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-left: 10px;
+}
+
+/* 🍉 Fruit List */
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+ul li {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+/* 🍏 Footer */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #2D3047;
+    /* Dark contrast */
+    color: white;
+    font-size: 1rem;
+}
