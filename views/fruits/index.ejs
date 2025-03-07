@@ -7,10 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        console.log('This shows from fruits/index.ejs')
-    </script>
+    
     <h1>All Fruits</h1>
+    <nav>
+        <ul>
+            <li>
+                <!-- views/fruits/index.ejs ** link to add new fruit-->
+                <a href="/fruits/new">Add New Fruit</a>
+            </li>
+        </ul>
+    </nav>
     <ul>
         <% fruits.forEach(fruit => { %>
           <li><%= fruit.name %></li>
