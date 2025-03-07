@@ -1,34 +1,47 @@
+<!-- views/fruits/show.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Sets the character encoding for the document -->
     <meta charset="UTF-8">
+    
+    <!-- Makes the page responsive on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Show Page</title>
+    
+    <!-- Sets the page title dynamically based on the fruit name -->
+    <title>Fruit: <%= fruit.name %></title>
 </head>
 <body>
+    <!-- Displays the name of the fruit -->
     <h1><%= fruit.name %></h1>
     
+    <!-- Navigation Links -->
     <nav>
         <ul>
             <li>
-                <a href="/">Back to Home</a>
+                <a href="/">Back to Home</a> <!-- Link back to the homepage -->
             </li>
             <li>
-                <a href="/fruits">Back to Fruits</a>
+                <a href="/fruits">Back to Fruits</a> <!-- Link back to the fruits index page -->
             </li>
         </ul>
     </nav>
-        <% if (fruit.isReadyToEat) { %>
-            <p>This fruit is ready to eat!</p>
-        <% } else { %>
-            <p>This fruit is not ready to eat!</p>
-        <% } %>
 
+    <!-- Conditional Rendering: Checks if the fruit is ready to eat -->
+    <% if (fruit.isReadyToEat) { %>
+        <p>This fruit is ready to eat!</p>
+    <% } else { %>
+        <p>This fruit is not ready to eat!</p>
+    <% } %>
 
-    <!-- new delete button //_(id)method example of restful routing-->
-    <form action="/fruits/<%=fruit._id%>?_method=DELETE" method="POST">
+    <!-- DELETE FORM -->
+    <!-- This form sends a DELETE request using method override -->
+    <form action="/fruits/<%= fruit._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete <%= fruit.name %></button>
     </form>
-    
+
+    <!-- EDIT LINK -->
+    <!-- Takes user to the edit form for this specific fruit -->
+    <a href="/fruits/<%= fruit._id %>/edit">Edit: <%= fruit.name %></a>
 </body>
 </html>
