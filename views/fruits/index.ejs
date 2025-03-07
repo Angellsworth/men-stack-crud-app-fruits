@@ -1,17 +1,27 @@
+<!-- views/fruits/index.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Sets the character encoding for the document -->
     <meta charset="UTF-8">
+    
+    <!-- Makes the page responsive on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title -->
     <title>All Fruits</title>
 </head>
 <body>
     
+    <!-- Main Heading -->
     <h1>All Fruits</h1>
+
+    <!-- Navigation Menu -->
     <nav>
         <ul>
             <li>
-                <!-- Link to Home Page -->
+                <!-- Link to the Home Page -->
                 <a href="/">Home</a>
             </li>
             <li>
@@ -21,14 +31,16 @@
         </ul>
     </nav>
 
+    <!-- List of all fruits -->
     <ul>
-        <% fruits.forEach(fruit => { %>
+        <% fruits.forEach(fruit => { %>  <!-- Loop through the fruits array passed from the server -->
           <li>
+            <!-- Link to the Show page for each individual fruit -->
             <a href="/fruits/<%= fruit._id %>"> 
-                <%= fruit.name %> 
+                <%= fruit.name %>  <!-- Display fruit name dynamically -->
             </a>
-          </li> <!-- Closing li tag was missing -->
-        <% }); %>
+          </li> <!-- Closing li tag for each fruit -->
+        <% }); %>  <!-- End of the loop -->
     </ul>
 
 </body>
