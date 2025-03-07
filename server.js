@@ -30,6 +30,9 @@ mongoose.connection.on("error", (error) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method")); // methodOverride reads "_method" query param for DELETE or PUT requests
 app.use(morgan("dev")); //
+app.use(express.static('public'))//static asset middleware- used to send static assets to the client (css, images, dom manipulation javascript)
+app.set("views", __dirname + "/views"); // Ensures Express looks for views in /views
+app.set("view engine", "ejs"); // Ensures Express uses EJS for rendering
 
 // ********** ROUTES **********
 
