@@ -1,0 +1,26 @@
+{
+  "name": "men-stack-crud-app-fruits",
+  "version": "1.0.0",
+  "description": "Full Stack CRUD",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angellsworth/men-stack-crud-app-fruits.git"
+  },
+  "author": "Angela E.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Angellsworth/men-stack-crud-app-fruits/issues"
+  },
+  "homepage": "https://github.com/Angellsworth/men-stack-crud-app-fruits#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1"
+  }
+}
