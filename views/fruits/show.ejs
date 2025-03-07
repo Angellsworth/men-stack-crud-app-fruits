@@ -2,30 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Sets the character encoding for the document -->
-    <meta charset="UTF-8">
-    
-    <!-- Makes the page responsive on all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Sets the page title dynamically based on the fruit name -->
-    <title>Fruit: <%= fruit.name %></title>
+    <!-- Include the head partial, dynamically setting the title -->
+    <%- include("../partials/head", { title: `Fruit: ${fruit.name}` }) %>
 </head>
 <body>
+    <!-- Include the navigation bar partial -->
+    <%- include("../partials/navbar") %>
+
     <!-- Displays the name of the fruit -->
     <h1><%= fruit.name %></h1>
-    
-    <!-- Navigation Links -->
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Back to Home</a> <!-- Link back to the homepage -->
-            </li>
-            <li>
-                <a href="/fruits">Back to Fruits</a> <!-- Link back to the fruits index page -->
-            </li>
-        </ul>
-    </nav>
 
     <!-- Conditional Rendering: Checks if the fruit is ready to eat -->
     <% if (fruit.isReadyToEat) { %>
@@ -40,8 +25,11 @@
         <button type="submit">Delete <%= fruit.name %></button>
     </form>
 
-    <!-- EDIT LINK -->
     <!-- Takes user to the edit form for this specific fruit -->
-    <a href="/fruits/<%= fruit._id %>/edit">Edit: <%= fruit.name %></a>
+    <!-- EDIT BUTTON (Styled as a Button) -->
+<a href="/fruits/<%= fruit._id %>/edit" class="button">Edit: <%= fruit.name %></a>
+
+    <!-- Include the footer partial -->
+    <%- include("../partials/footer") %>
 </body>
 </html>
