@@ -1,14 +1,20 @@
 <!-- views/fruits/new.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Sets the character encoding for the document -->
     <meta charset="UTF-8" />
+    
+    <!-- Makes the page responsive on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Sets the page title -->
     <title>Create a Fruit</title>
   </head>
   <body>
     <h1>Create a New Fruit!</h1>
+
+    <!-- Navigation: Link back to the Fruits list -->
     <nav>
         <ul>
             <li>
@@ -17,11 +23,19 @@
         </ul>
     </nav>
 
+    <!-- Form to add a new fruit -->
+    <!-- Sends a POST request to /fruits when submitted -->
     <form action="/fruits" method="post">
+        
+        <!-- Fruit Name Input Field -->
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" required />
+        
+        <!-- Checkbox to mark if the fruit is ready to eat -->
         <label for="isReadyToEat">Ready to Eat?</label>
-        <input type="checkbox" name="isReadyToEat" id="isReadyToEat">
+        <input type="checkbox" name="isReadyToEat" id="isReadyToEat" />
+
+        <!-- Submit Button -->
         <button type="submit">Add Fruit</button>
     </form>
   </body>
