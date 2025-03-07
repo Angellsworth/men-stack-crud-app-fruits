@@ -3,6 +3,8 @@ const express = require("express"); // Import Express framework
 const dotenv = require("dotenv"); // Import dotenv for environment variables
 const mongoose = require("mongoose"); // Import Mongoose to interact with MongoDB
 const Fruit = require("./models/fruit.js"); // Import the Fruit model from fruit.js
+const methodOverride = require("method-override"); // new
+const morgan = require("morgan"); //new
 
 // ********** INITIALIZE EXPRESS **********
 const app = express(); // Create an instance of Express
@@ -25,6 +27,8 @@ mongoose.connection.on("error", (error) => {
 // ********** MIDDLEWARE **********
 // Body parser middleware: Reads form data and makes it accessible in req.body
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method")); // methodOverride reads "_method" query param for DELETE or PUT requests
+app.use(morgan("dev")); //
 
 // ********** ROUTES **********
 
@@ -70,6 +74,20 @@ app.get("/fruits/:fruitId", async (req, res) => {
     }
 });
 
+//*********** DELETE REQUEST *********/
+// Deletes a fruit from MongoDB using its ID
+app.delete('/fruits/:fruitId', async (req, res) => {
+    try {
+        // Attempt to find and delete the fruit by ID
+        await Fruit.findByIdAndDelete(req.params.fruitId);
+        console.log(`Successfully deleted fruit with ID: ${req.params.fruitId}`);
+        res.redirect("/fruits");
+    } catch (error) {
+        // Log the error and send a 500 response
+        console.error(`Error deleting fruit: ${error.message}`);
+        res.status(500).send("Internal Server Error: Could not delete fruit");
+    }
+});
 // ********** START SERVER **********
 app.listen(3000, () => {
   console.log("Making a CRUD-y Salad on Port 3000"); // Server is running
