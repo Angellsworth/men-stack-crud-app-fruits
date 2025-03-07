@@ -3,34 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Sets the character encoding for the document -->
-    <meta charset="UTF-8">
-    
-    <!-- Makes the page responsive on all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <%- include("../partials/head", { title: "All Fruits" }) %>
     <!-- Page title -->
     <title>All Fruits</title>
 </head>
 <body>
-    
+    <%- include("../partials/navbar") %>
     <!-- Main Heading -->
     <h1>All Fruits</h1>
-
-    <!-- Navigation Menu -->
-    <nav>
-        <ul>
-            <li>
-                <!-- Link to the Home Page -->
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <!-- Link to Add New Fruit Form -->
-                <a href="/fruits/new">Add New Fruit</a>
-            </li>
-        </ul>
-    </nav>
-
     <!-- List of all fruits -->
     <ul>
         <% fruits.forEach(fruit => { %>  <!-- Loop through the fruits array passed from the server -->
@@ -42,6 +22,6 @@
           </li> <!-- Closing li tag for each fruit -->
         <% }); %>  <!-- End of the loop -->
     </ul>
-
+    <%- include("../partials/footer") %>
 </body>
 </html>
