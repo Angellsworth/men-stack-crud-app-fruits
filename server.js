@@ -53,7 +53,7 @@ app.post("/fruits", async (req, res) => {
     req.body.isReadyToEat = !!req.body.isReadyToEat//(double exclamation marks (!!) are a shortcut to convert any value into a strict true or false. )
     //create the data in our database
     await Fruit.create(req.body);
-    res.redirect("/fruits/new");
+    res.redirect("/fruits");
   });
 
 //index of fruits route for fruits
@@ -61,6 +61,8 @@ app.get('/fruits', async(req, res) => {
     const allFruits = await Fruit.find({})
     res.render('fruits/index.ejs', {fruits: allFruits})
 })
+//UPDATE*add new fruit
+
 // Start the server and listen on port 3000
 app.listen(3000, () => {
   console.log("Making a CRUD-y Salad on Port 3000");
